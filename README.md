@@ -3,7 +3,7 @@ TaskMate CLI – Project Management Tool
 Overview:
 
 TaskMate is a simple command-line project management tool built in Python.  
-It allows admins to manage users, projects, and tasks with clear object-oriented design and JSON persistence**.
+It allows admins to manage users, projects, and tasks with clear object-oriented design and JSON persistence.
 
 
 Features:
