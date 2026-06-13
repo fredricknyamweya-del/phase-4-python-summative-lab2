@@ -1,48 +1,115 @@
 import argparse
-import os
+import sys
+from models.user import User
+from models.project import Project
+from models.task import Task
+from utils.file_utils import load_data, save_data
 
 def main():
-    manager = TaskMateManager()
-    parser = argparse.ArgumentParser(description="TaskMate CLI")
-    subparsers = parser.add_subparsers(dest='command')
+    parser = argparse.ArgumentParser(description="TaskMateManager CLI Tool")
+    subparsers = parser.add_subparsers(dest="command")
     
-    #Add User.
-    add_user = subparsers.add_parser("add_user", help="Add a user")
-    add_user.add_argument("--name", required=True, help="User name")
-    add_user.add_argument("--email", required=True, help="User email")
+    # Add User
+    add_user_parser = subparsers.add_parser("add-user", help="Add a user")
+    add_user_parser.add_argument("--name", required=True, help="User name")
+    add_user_parser.add_argument("--email", required=True, help="User email")
     
-    #List Users.
-    list_users = subparsers.add_parser("list_users", help="List all users")
+    # List Users
+    subparsers.add_parser("list-users", help="List all users")
     
-    #Add Project.
-    add_project = subparsers.add_parser("add_project", help="Add a project")
-    add_project.add_argument("--title", required=True, help="Project title")
-    add_project.add_argument("--description", required=True, help="Project description")
-    
-    #Add Task.
-    add_task = subparsers.add_parser("add_task", help="Add a task")
+    # Add Project
+    add_project_parser = subparsers.add_parser("add-project", help="Add a project")
+    add_project_parser.add_argument("--title", required=True, help="Project title")
+    add_project_parser.add_argument("--description", required=True, help="Project description")
+    add_project_parser.add_argument("--due-date", required=True, help="Project due date")
+    add_project_parser.add_argument("--user", type=int, required=True, help="User ID")
+
+    # List Projects
+    subparsers.add_parser("list-projects", help="List all projects")
+
+    # Search Projects by user
+    search_projects_parser = subparsers.add_parser("search-projects", help="Search projects by user ID")
+    search_projects_parser.add_argument("--user", type=int, required=True, help="User ID to filter by")
+
+    # Add Task
+    add_task = subparsers.add_parser("add-task", help="Add a task")
     add_task.add_argument("--title", required=True, help="Task title")
-    add_task.add_argument("--project-id", type=int, required=True, help="Project ID")
+    add_task.add_argument("--status", required=True, help="Task status")
+    add_task.add_argument("--project", type=int, required=True, help="Project ID")
     add_task.add_argument("--user", type=int, required=True, help="User ID")
     
-    #Finish Task.
-    finish_task = subparsers.add_parser("finish_task", help="finish a task")
-    finish_task.add_argument("--task-id", type=int, required=True, help="Task ID")
+    # Complete Task
+    complete_task = subparsers.add_parser("complete-task", help="Complete a task")
+    complete_task.add_argument("--id", type=int, required=True, help="Task ID")
     
     args = parser.parse_args()
     
-    if args.command == "add_user":
-        manager.add_user(args.name, args.email)
-    elif args.command == "list_users":
-        manager.list_users()
-    elif args.command == "add_project":
-        manager.add_project(args.title, args.description, args.user)
-    elif args.command == "add_task":
-        manager.add_task(args.title, args.project_id, args.user)
-    elif args.command == "finish_task":
-        manager.finish_task(args.task_id)
+    # connect commands to persistence
+    data = load_data()
+
+    if args.command == "add-user":
+        new_id = len(data["users"]) + 1
+        user = {"id": new_id, "name": args.name, "email": args.email}
+        data["users"].append(user)
+        save_data(data)
+        print(f"User '{args.name}' added successfully!")
+
+    elif args.command == "list-users":
+        for u in data["users"]:
+            print(f"{u['id']}: {u['name']} ({u['email']})")
+
+    elif args.command == "add-project":
+        new_id = len(data["projects"]) + 1
+        project = {
+            "id": new_id,
+            "title": args.title,
+            "description": args.description,
+            "due_date": args.due_date,
+            "users": [args.user]
+        }
+        data["projects"].append(project)
+        save_data(data)
+        print(f"Project '{args.title}' added successfully!")
+
+    elif args.command == "list-projects":
+        for p in data["projects"]:
+            print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
+
+    elif args.command == "search-projects":
+        projects = [p for p in data["projects"] if args.user in p["users"]]
+        if projects:
+            for p in projects:
+                print(f"- {p['title']} (due: {p['due_date']})")
+        else:
+            print(f"No projects for user {args.user}")
+
+    elif args.command == "add-task":
+        new_id = len(data["tasks"]) + 1
+        task = {
+            "id": new_id,
+            "title": args.title,
+            "status": args.status,
+            "project": args.project,
+            "user": args.user
+        }
+        data["tasks"].append(task)
+        save_data(data)
+        print(f"Task '{args.title}' added successfully!")
+        
+    elif args.command == "complete-task":
+        for t in data["tasks"]:
+            if t["id"] == args.id:
+                t["status"] = "Done"
+                save_data(data)
+                print(f"Task {args.id} marked as complete!")
+                break
+        else:
+            print(f"Task with ID {args.id} not found.")
+    
     else:
         parser.print_help()
-        
+
+
+#  Entry point 
 if __name__ == "__main__":
     main()

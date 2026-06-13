@@ -1,0 +1,186 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Mukiama",
+            "email": "mukiama@gmail.com"
+        },
+        {
+            "id": 2,
+            "name": "Munira",
+            "email": "munira@gmail.com"
+        },
+        {
+            "id": 3,
+            "name": "Fredrick",
+            "email": "fredrick@gmail.com"
+        },
+        {
+            "id": 4,
+            "name": "Norman",
+            "email": "norman@gmail.com"
+        },
+        {
+            "id": 5,
+            "name": "Njagi",
+            "email": "mjagi@gmail.com"
+        },
+        {
+            "id": 6,
+            "name": "Natalie",
+            "email": "natalie@gmail.com"
+        },
+        {
+            "id": 7,
+            "name": "Sharon",
+            "email": "sharon@gmail.con"
+        },
+        {
+            "id": 8,
+            "name": "Kevin",
+            "email": "kevin@gmail.com"
+        }
+    ],
+    "projects": [
+        {
+            "id": 1,
+            "title": "School Website",
+            "description": "Build a homepage for the academy",
+            "due_date": "2026-06-30",
+            "users": [
+                1,
+                2
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Library System",
+            "description": "CLI tool for managing books",
+            "due_date": "2026-07-15",
+            "users": [
+                2
+            ]
+        },
+        {
+            "id": 3,
+            "title": "Invent\nory System",
+            "description": "Track stock Items",
+            "due_date": "2026-08-01",
+            "users": [
+                8
+            ]
+        },
+        {
+            "id": 4,
+            "title": "API Integration",
+            "description": "Integrate external APIs for stock tracking",
+            "due_date": "2026-09-01",
+            "users": [
+                8
+            ]
+        },
+        {
+            "id": 5,
+            "title": "UI Redesign",
+            "description": "Revamp frontend for better UX",
+            "due_date": "2026-07-15",
+            "users": [
+                3
+            ]
+        },
+        {
+            "id": 6,
+            "title": "UI Redesign",
+            "description": "Revamp frontend for better UX",
+            "due_date": "2026-07-15",
+            "users": [
+                5
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Reporting Engine",
+            "description": "Build reporting and analytics pipeline",
+            "due_date": "2026-10-10",
+            "users": [
+                6
+            ]
+        },
+        {
+            "id": 8,
+            "title": "Frontend-Revamp",
+            "description": "Redesign UI for better usability",
+            "due_date": "2026-09-01",
+            "users": [
+                4
+            ]
+        },
+        {
+            "id": 9,
+            "title": "Frontend-Revamp",
+            "description": "Redesign UI for better usability",
+            "due_date": "2026-09-01",
+            "users": [
+                7
+            ]
+        }
+    ],
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Design homepage",
+            "status": "Pending",
+            "project": 1,
+            "user": 1
+        },
+        {
+            "id": 2,
+            "title": "Write backend API",
+            "status": "In Progress",
+            "project": 1,
+            "user": 2
+        },
+        {
+            "id": 3,
+            "title": "Add search feature",
+            "status": "Done",
+            "project": 2,
+            "user": 2
+        },
+        {
+            "id": 4,
+            "title": "Create project plan",
+            "status": "Pending",
+            "project": 1,
+            "user": 3
+        },
+        {
+            "id": 5,
+            "title": "Setup CI/CD pipeline",
+            "status": "Pending",
+            "project": 1,
+            "user": 4
+        },
+        {
+            "id": 6,
+            "title": "Write documentation",
+            "status": "Pending",
+            "project": 2,
+            "user": 5
+        },
+        {
+            "id": 7,
+            "title": "Design database schema",
+            "status": "Pending",
+            "project": 2,
+            "user": 6
+        },
+        {
+            "id": 8,
+            "title": "Test user login",
+            "status": "Pending",
+            "project": 1,
+            "user": 7
+        }
+    ]
+}
