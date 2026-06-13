@@ -38,6 +38,12 @@ def main():
     add_task.add_argument("--project", type=int, required=True, help="Project ID")
     add_task.add_argument("--user", type=int, required=True, help="User ID")
     
+    # List Tasks
+    subparsers.add_parser("list-tasks", help="List all tasks")
+
+    # List projects sorted by due date
+    subparsers.add_parser("list-due-date", help="List projects sorted by due date")
+
     # Complete Task
     complete_task = subparsers.add_parser("complete-task", help="Complete a task")
     complete_task.add_argument("--id", type=int, required=True, help="Task ID")
@@ -96,6 +102,15 @@ def main():
         save_data(data)
         print(f"Task '{args.title}' added successfully!")
         
+    elif args.command == "list-tasks":
+        for t in data["tasks"]:
+            print(f"Task(id={t['id']}, title={t['title']}, status={t['status']}, project={t['project']}, user={t['user']})")
+
+    elif args.command == "list-due-date":
+        sorted_projects = sorted(data["projects"], key=lambda p: p["due_date"])
+        for p in sorted_projects:
+            print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
+
     elif args.command == "complete-task":
         for t in data["tasks"]:
             if t["id"] == args.id:
