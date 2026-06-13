@@ -136,7 +136,7 @@
         {
             "id": 2,
             "title": "Write backend API",
-            "status": "In Progress",
+            "status": "Done",
             "project": 1,
             "user": 2
         },
