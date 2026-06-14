@@ -60,9 +60,27 @@ def main():
         save_data(data)
         print(f"User '{args.name}' added successfully!")
 
-    elif args.command == "list-users":
-        for u in data["users"]:
-            print(f"{u['id']}: {u['name']} ({u['email']})")
+    elif args.command == "list-projects":
+        # Build a lookup dictionary for user IDs → names
+        user_lookup = {u["id"]: u["name"] for u in data["users"]}
+
+        if args.id:
+            project = next((p for p in data["projects"] if p["id"] == args.id), None)
+            if project:
+                print(f"Project(id={project['id']}, title={project['title']}, due-date={project['due_date']})")
+                print("Users assigned:")
+                for uid in project["users"]:
+                    ßprint(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
+            else:
+                print(f"❌ Project with ID {args.id} not found.")
+        else:
+            for p in data["projects"]:
+                print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
+                print("Users assigned:")
+                for uid in p["users"]:
+                    print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
+                print()  # blank line between projects
+
 
     elif args.command == "add-project":
         new_id = len(data["projects"]) + 1
