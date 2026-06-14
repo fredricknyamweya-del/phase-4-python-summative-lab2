@@ -9,38 +9,38 @@ def main():
     parser = argparse.ArgumentParser(description="TaskMateManager CLI Tool")
     subparsers = parser.add_subparsers(dest="command")
     
-    # Add User
+    # Adding User
     add_user_parser = subparsers.add_parser("add-user", help="Add a user")
     add_user_parser.add_argument("--name", required=True, help="User name")
     add_user_parser.add_argument("--email", required=True, help="User email")
     
-    # List Users
+    # Listing Users
     list_users_parser = subparsers.add_parser("list-users", help="List all users")
     list_users_parser.add_argument("--id", type=int, help="Filter by user ID")
     
-    # Add Project
+    # Adding Project
     add_project_parser = subparsers.add_parser("add-project", help="Add a project")
     add_project_parser.add_argument("--title", required=True, help="Project title")
     add_project_parser.add_argument("--description", required=True, help="Project description")
     add_project_parser.add_argument("--due-date", required=True, help="Project due date")
     add_project_parser.add_argument("--user", type=int, nargs="+", required=True, help="User IDs assigned to project")
 
-    # List Projects
+    # Listing Projects
     list_projects_parser = subparsers.add_parser("list-projects", help="List all projects or a specific one")
     list_projects_parser.add_argument("--id", type=int, help="Project ID to filter by")
 
-    # Search Projects by user
+    # Searching Projects by user
     search_projects_parser = subparsers.add_parser("search-projects", help="Search projects by user ID")
     search_projects_parser.add_argument("--user", type=int, required=True, help="User ID to filter by")
 
-    # Add Task
+    # Adding Task
     add_task = subparsers.add_parser("add-task", help="Add a task")
     add_task.add_argument("--title", required=True, help="Task title")
     add_task.add_argument("--status", required=True, help="Task status")
     add_task.add_argument("--project", type=int, required=True, help="Project ID")
     add_task.add_argument("--user", type=int, required=True, help="User ID")
     
-    # List Tasks
+    # Listing Tasks
     subparsers.add_parser("list-tasks", help="List all tasks")
 
     # List projects sorted by due date
