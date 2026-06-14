@@ -123,6 +123,17 @@
             "users": [
                 7
             ]
+        },
+        {
+            "id": 10,
+            "title": "Inventory System",
+            "description": "Track stock items",
+            "due_date": "2026-08-01",
+            "users": [
+                8,
+                3,
+                6
+            ]
         }
     ],
     "tasks": [

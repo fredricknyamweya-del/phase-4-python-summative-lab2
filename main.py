@@ -22,7 +22,7 @@ def main():
     add_project_parser.add_argument("--title", required=True, help="Project title")
     add_project_parser.add_argument("--description", required=True, help="Project description")
     add_project_parser.add_argument("--due-date", required=True, help="Project due date")
-    add_project_parser.add_argument("--user", type=int, required=True, help="User ID")
+    add_project_parser.add_argument("--user", type=int,nargs="+", required=True, help="User ID")
 
     # List Projects
     subparsers.add_parser("list-projects", help="List all projects")
@@ -71,7 +71,7 @@ def main():
             "title": args.title,
             "description": args.description,
             "due_date": args.due_date,
-            "users": [args.user]
+            "users": args.user
         }
         data["projects"].append(project)
         save_data(data)
@@ -79,7 +79,8 @@ def main():
 
     elif args.command == "list-projects":
         for p in data["projects"]:
-            print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
+            print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']}, users={p['users']})")
+
 
     elif args.command == "search-projects":
         projects = [p for p in data["projects"] if args.user in p["users"]]
