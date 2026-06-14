@@ -126,7 +126,7 @@
         {
             "id": 2,
             "title": "Implement backend API",
-            "status": "In Progress",
+            "status": "Done",
             "project": 1,
             "user": 2
         },
@@ -147,7 +147,7 @@
         {
             "id": 5,
             "title": "Setup database schema",
-            "status": "Pending",
+            "status": "Done",
             "project": 3,
             "user": 6
         },
@@ -175,7 +175,7 @@
         {
             "id": 9,
             "title": "Build reporting charts",
-            "status": "Pending",
+            "status": "Done",
             "project": 6,
             "user": 6
         }
