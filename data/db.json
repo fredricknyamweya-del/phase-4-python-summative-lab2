@@ -58,16 +58,18 @@
             "description": "CLI tool for managing books",
             "due_date": "2026-07-15",
             "users": [
-                2
+                2,
+                5
             ]
         },
         {
             "id": 3,
-            "title": "Invent\nory System",
-            "description": "Track stock Items",
+            "title": "Inventory System",
+            "description": "Track stock items across departments",
             "due_date": "2026-08-01",
             "users": [
-                8
+                3,
+                6
             ]
         },
         {
@@ -81,57 +83,20 @@
         },
         {
             "id": 5,
-            "title": "UI Redesign",
-            "description": "Revamp frontend for better UX",
-            "due_date": "2026-07-15",
-            "users": [
-                3
-            ]
-        },
-        {
-            "id": 6,
-            "title": "UI Redesign",
-            "description": "Revamp frontend for better UX",
-            "due_date": "2026-07-15",
-            "users": [
-                5
-            ]
-        },
-        {
-            "id": 7,
-            "title": "Reporting Engine",
-            "description": "Build reporting and analytics pipeline",
-            "due_date": "2026-10-10",
-            "users": [
-                6
-            ]
-        },
-        {
-            "id": 8,
-            "title": "Frontend-Revamp",
+            "title": "Frontend Revamp",
             "description": "Redesign UI for better usability",
-            "due_date": "2026-09-01",
+            "due_date": "2026-09-15",
             "users": [
-                4
-            ]
-        },
-        {
-            "id": 9,
-            "title": "Frontend-Revamp",
-            "description": "Redesign UI for better usability",
-            "due_date": "2026-09-01",
-            "users": [
+                4,
                 7
             ]
         },
         {
-            "id": 10,
-            "title": "Inventory System",
-            "description": "Track stock items",
-            "due_date": "2026-08-01",
+            "id": 6,
+            "title": "Reporting Dashboard",
+            "description": "Build analytics dashboard for stakeholders",
+            "due_date": "2026-10-10",
             "users": [
-                8,
-                3,
                 6
             ]
         }
@@ -139,59 +104,66 @@
     "tasks": [
         {
             "id": 1,
-            "title": "Design homepage",
+            "title": "Design homepage layout",
             "status": "Done",
             "project": 1,
             "user": 1
         },
         {
             "id": 2,
-            "title": "Write backend API",
-            "status": "Done",
+            "title": "Implement backend API",
+            "status": "In Progress",
             "project": 1,
             "user": 2
         },
         {
             "id": 3,
-            "title": "Add search feature",
+            "title": "Add search functionality",
             "status": "Done",
-            "project": 2,
-            "user": 2
-        },
-        {
-            "id": 4,
-            "title": "Create project plan",
-            "status": "Pending",
-            "project": 1,
-            "user": 3
-        },
-        {
-            "id": 5,
-            "title": "Setup CI/CD pipeline",
-            "status": "Pending",
-            "project": 1,
-            "user": 4
-        },
-        {
-            "id": 6,
-            "title": "Write documentation",
-            "status": "Pending",
             "project": 2,
             "user": 5
         },
         {
-            "id": 7,
-            "title": "Design database schema",
+            "id": 4,
+            "title": "Create stock tracking module",
             "status": "Pending",
-            "project": 2,
+            "project": 3,
+            "user": 3
+        },
+        {
+            "id": 5,
+            "title": "Setup database schema",
+            "status": "Pending",
+            "project": 3,
             "user": 6
         },
         {
-            "id": 8,
-            "title": "Test user login",
+            "id": 6,
+            "title": "Integrate payment API",
             "status": "Pending",
-            "project": 1,
+            "project": 4,
+            "user": 8
+        },
+        {
+            "id": 7,
+            "title": "Redesign navigation bar",
+            "status": "Pending",
+            "project": 5,
+            "user": 4
+        },
+        {
+            "id": 8,
+            "title": "Test accessibility features",
+            "status": "Pending",
+            "project": 5,
             "user": 7
+        },
+        {
+            "id": 9,
+            "title": "Build reporting charts",
+            "status": "Pending",
+            "project": 6,
+            "user": 6
         }
     ]
 }
