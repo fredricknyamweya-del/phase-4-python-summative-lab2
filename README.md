@@ -16,4 +16,13 @@ Features:
 - Data persistence via JSON file.
 - CLI commands using `argparse`.
 
+Commands Implemented:
 
+add-user to create new users
+list-users to show all users
+add-project to create projects with due dates and assigned users
+list-projects to show all projects
+list-due-date to sort projects by due date
+search-projects --user id to filter projects by user
+add-task to create tasks linked to projects/users
+list-tasks to show all tasks
