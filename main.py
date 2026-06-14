@@ -15,17 +15,19 @@ def main():
     add_user_parser.add_argument("--email", required=True, help="User email")
     
     # List Users
-    subparsers.add_parser("list-users", help="List all users")
+    list_users_parser = subparsers.add_parser("list-users", help="List all users")
+    list_users_parser.add_argument("--id", type=int, help="Filter by user ID")
     
     # Add Project
     add_project_parser = subparsers.add_parser("add-project", help="Add a project")
     add_project_parser.add_argument("--title", required=True, help="Project title")
     add_project_parser.add_argument("--description", required=True, help="Project description")
     add_project_parser.add_argument("--due-date", required=True, help="Project due date")
-    add_project_parser.add_argument("--user", type=int,nargs="+", required=True, help="User ID")
+    add_project_parser.add_argument("--user", type=int, nargs="+", required=True, help="User IDs assigned to project")
 
     # List Projects
-    subparsers.add_parser("list-projects", help="List all projects")
+    list_projects_parser = subparsers.add_parser("list-projects", help="List all projects or a specific one")
+    list_projects_parser.add_argument("--id", type=int, help="Project ID to filter by")
 
     # Search Projects by user
     search_projects_parser = subparsers.add_parser("search-projects", help="Search projects by user ID")
@@ -60,27 +62,16 @@ def main():
         save_data(data)
         print(f"User '{args.name}' added successfully!")
 
-    elif args.command == "list-projects":
-        # Build a lookup dictionary for user IDs → names
-        user_lookup = {u["id"]: u["name"] for u in data["users"]}
-
+    elif args.command == "list-users":
         if args.id:
-            project = next((p for p in data["projects"] if p["id"] == args.id), None)
-            if project:
-                print(f"Project(id={project['id']}, title={project['title']}, due-date={project['due_date']})")
-                print("Users assigned:")
-                for uid in project["users"]:
-                    ßprint(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
+            user = next((u for u in data["users"] if u["id"] == args.id), None)
+            if user:
+                print(f"{user['id']}: {user['name']} ({user['email']})")
             else:
-                print(f"❌ Project with ID {args.id} not found.")
+                print(f"❌ User with ID {args.id} not found.")
         else:
-            for p in data["projects"]:
-                print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
-                print("Users assigned:")
-                for uid in p["users"]:
-                    print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
-                print()  # blank line between projects
-
+            for u in data["users"]:
+                print(f"{u['id']}: {u['name']} ({u['email']})")
 
     elif args.command == "add-project":
         new_id = len(data["projects"]) + 1
@@ -96,9 +87,25 @@ def main():
         print(f"Project '{args.title}' added successfully!")
 
     elif args.command == "list-projects":
-        for p in data["projects"]:
-            print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']}, users={p['users']})")
+        # Build a lookup dictionary for user IDs → names
+        user_lookup = {u["id"]: u["name"] for u in data["users"]}
 
+        if args.id:
+            project = next((p for p in data["projects"] if p["id"] == args.id), None)
+            if project:
+                print(f"Project(id={project['id']}, title={project['title']}, due-date={project['due_date']})")
+                print("Users assigned:")
+                for uid in project["users"]:
+                    print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
+            else:
+                print(f"❌ Project with ID {args.id} not found.")
+        else:
+            for p in data["projects"]:
+                print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
+                print("Users assigned:")
+                for uid in p["users"]:
+                    print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
+                print()  # blank line between projects
 
     elif args.command == "search-projects":
         projects = [p for p in data["projects"] if args.user in p["users"]]
@@ -122,8 +129,14 @@ def main():
         print(f"Task '{args.title}' added successfully!")
         
     elif args.command == "list-tasks":
+        # Build lookup dictionaries for user names and project titles
+        user_lookup = {u["id"]: u["name"] for u in data["users"]}
+        project_lookup = {p["id"]: p["title"] for p in data["projects"]}
+
         for t in data["tasks"]:
-            print(f"Task(id={t['id']}, title={t['title']}, status={t['status']}, project={t['project']}, user={t['user']})")
+            print(f"Task(id={t['id']}, title={t['title']}, status={t['status']}, "
+                  f"project={project_lookup.get(t['project'], 'Unknown')}, "
+                  f"user={user_lookup.get(t['user'], 'Unknown')})")
 
     elif args.command == "list-due-date":
         sorted_projects = sorted(data["projects"], key=lambda p: p["due_date"])
@@ -144,6 +157,6 @@ def main():
         parser.print_help()
 
 
-#  Entry point 
+# Entry point 
 if __name__ == "__main__":
     main()
