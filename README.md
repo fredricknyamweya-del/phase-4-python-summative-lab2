@@ -19,11 +19,11 @@ Features:
 
 Commands Implemented:
 
-add-user to create new users
-list-users to show all users
-add-project to create projects with due dates and assigned users
-list-projects to show all projects
-list-due-date to sort projects by due date
-search-projects --user id to filter projects by user
-add-task to create tasks linked to projects/users
-list-tasks to show all tasks
+1. add-user to create new users
+2. list-users to show all users
+3. add-project to create projects with due dates and assigned users
+4. list-projects to show all projects
+5. list-due-date to sort projects by due date
+6. search-projects --user id to filter projects by user
+7. add-task to create tasks linked to projects/users
+8. list-tasks to show all tasks
