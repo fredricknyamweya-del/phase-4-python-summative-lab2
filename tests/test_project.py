@@ -1,5 +1,7 @@
 import pytest
+from models.user import User
 from models.project import Project
+from models.task import Task
 
 def test_create_project():
     project = Project(1, "School Website", "Homepage build", "2026-06-30", [1])
