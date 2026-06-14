@@ -108,12 +108,17 @@ def main():
                 print()  # blank line between projects
 
     elif args.command == "search-projects":
-        projects = [p for p in data["projects"] if args.user in p["users"]]
-        if projects:
-            for p in projects:
-                print(f"- {p['title']} (due: {p['due_date']})")
+        # Check if user exists first
+        user_exists = any(u["id"] == args.user for u in data["users"])
+        if not user_exists:
+            print(f"User {args.user} does not exist")
         else:
-            print(f"No projects for user {args.user}")
+            projects = [p for p in data["projects"] if args.user in p["users"]]
+            if projects:
+                for p in projects:
+                    print(f"- {p['title']} (due: {p['due_date']})")
+            else:
+                print(f"No projects for user {args.user}")
 
     elif args.command == "add-task":
         new_id = len(data["tasks"]) + 1
