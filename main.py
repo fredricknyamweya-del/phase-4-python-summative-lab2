@@ -68,7 +68,7 @@ def main():
             if user:
                 print(f"{user['id']}: {user['name']} ({user['email']})")
             else:
-                print(f"❌ User with ID {args.id} not found.")
+                print(f"User with ID {args.id} not found.")
         else:
             for u in data["users"]:
                 print(f"{u['id']}: {u['name']} ({u['email']})")
