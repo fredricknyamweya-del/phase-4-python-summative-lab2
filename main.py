@@ -96,7 +96,7 @@ def main():
                 print(f"Project(id={project['id']}, title={project['title']}, due-date={project['due_date']})")
                 print("Users assigned:")
                 for uid in project["users"]:
-                    print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
+                    print(f"{uid}: {user_lookup.get(uid, 'Unknown')}")
             else:
                 print(f"Project with ID {args.id} not found.")
         else:
@@ -105,7 +105,7 @@ def main():
                 print("Users assigned:")
                 for uid in p["users"]:
                     print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
-                print()  # blank line between projects
+                print() 
 
     elif args.command == "search-projects":
         # Check if user exists first

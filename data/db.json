@@ -39,6 +39,11 @@
             "id": 8,
             "name": "Kevin",
             "email": "kevin@gmail.com"
+        },
+        {
+            "id": 9,
+            "name": "Alice",
+            "email": "alice@gmail.com"
         }
     ],
     "projects": [
@@ -98,6 +103,15 @@
             "due_date": "2026-10-10",
             "users": [
                 6
+            ]
+        },
+        {
+            "id": 7,
+            "title": "Devops",
+            "description": "Deployment and Opera\ntions",
+            "due_date": "2026-08-01",
+            "users": [
+                9
             ]
         }
     ],
