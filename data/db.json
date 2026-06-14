@@ -44,6 +44,11 @@
             "id": 9,
             "name": "Alice",
             "email": "alice@gmail.com"
+        },
+        {
+            "id": 10,
+            "name": "George",
+            "email": "george@gmail.com"
         }
     ],
     "projects": [
@@ -161,7 +166,7 @@
         {
             "id": 7,
             "title": "Redesign navigation bar",
-            "status": "Pending",
+            "status": "Done",
             "project": 5,
             "user": 4
         },
