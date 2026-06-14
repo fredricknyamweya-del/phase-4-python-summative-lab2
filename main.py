@@ -98,7 +98,7 @@ def main():
                 for uid in project["users"]:
                     print(f"- {uid}: {user_lookup.get(uid, 'Unknown')}")
             else:
-                print(f"❌ Project with ID {args.id} not found.")
+                print(f"Project with ID {args.id} not found.")
         else:
             for p in data["projects"]:
                 print(f"Project(id={p['id']}, title={p['title']}, due-date={p['due_date']})")
